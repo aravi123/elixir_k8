@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+    name: elixir-k8
+spec:
+  replicas: 2
+  selector:
+      matchLabels:
+          app: elixir_k8
+  template:
+    metadata:
+      labels: 
+        app: elixir_k8
+    spec:
+      containers:
+        - name: elixir-k8
+          image: aravi123/elixir_k8:latest
+          ports:
+            - containerPort: 3000
