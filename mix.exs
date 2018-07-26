@@ -19,7 +19,7 @@ defmodule ElixirK8.Mixfile do
   def application do
     [
       mod: {ElixirK8.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools,:dogstatsd]
     ]
   end
 
@@ -38,7 +38,9 @@ defmodule ElixirK8.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:distillery, "~> 1.5"}
+      {:distillery, "~> 1.5"},
+      {:dogstatsd, "0.0.3"}
+
     ]
   end
 end

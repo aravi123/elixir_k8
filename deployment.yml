@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: elixir-k8
-          image: aravi123/elixir_k8:latest
+          image: aravi123/elixir_k8:Latest
           ports:
-            - containerPort: 3000
+            - containerPort: 8080

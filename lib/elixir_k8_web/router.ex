@@ -17,6 +17,8 @@ defmodule ElixirK8Web.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    get "/hello",PageController,:hello
   end
 
   # Other scopes may use custom stacks.
