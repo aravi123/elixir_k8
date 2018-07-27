@@ -9,7 +9,7 @@ spec:
         app: datadog-agent
       name: datadog-agent
     spec:
-      serviceAccountName: datadog-agent
+      serviceAccountName: datadog-2-sa-1
       containers:
       - image: datadog/agent:latest
         imagePullPolicy: Always
