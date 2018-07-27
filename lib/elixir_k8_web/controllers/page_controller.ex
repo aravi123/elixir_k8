@@ -7,9 +7,7 @@ defmodule ElixirK8Web.PageController do
   end
 
   def hello(conn,_params) do
-    IO.puts(System.get_env("DD_KUBERNETES_KUBELET_HOST"))
-    IO.puts(System.get_env())
-    {:ok,statsd} = DogStatsd.new(System.get_env("DD_KUBERNETES_KUBELET_HOST"), 8080)
+    {:ok,statsd} = DogStatsd.new("10.63.245.131", 8125)
     IO.puts("here")
     DogStatsd.increment(statsd, "fucking.asshole")
     IO.puts("Here")

@@ -3,6 +3,7 @@ ARG APP_NAME=elixir_k8
 ARG PHOENIX_SUBDIR=.
 ENV MIX_ENV=prod REPLACE_OS_VARS=true TERM=xterm
 WORKDIR /opt/app
+RUN mix clean
 RUN apk update \
     && apk --no-cache --update add nodejs nodejs-npm \
     && mix local.rebar --force \
