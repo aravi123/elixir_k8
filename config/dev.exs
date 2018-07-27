@@ -11,6 +11,7 @@ config :elixir_k8, ElixirK8Web.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  dogstatsd: "localhost",
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../assets", __DIR__)]]
 
