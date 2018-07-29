@@ -48,7 +48,12 @@ defmodule ElixirK8Web.Endpoint do
   def init(_key, config) do
     if config[:load_from_system_env] do
       port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
-      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+      ip = System.get_env("DD_KUBERNETES_KUBELET_HOST") || raise "Error in dogstatsd ip"
+      config =
+        config
+        |> Keyword.put(:http, [:inet6, port: port])
+        |> Keyword.put(:ip,ip)
+      {:ok,config}
     else
       {:ok, config}
     end
