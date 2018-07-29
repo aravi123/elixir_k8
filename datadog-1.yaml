@@ -1,0 +1,115 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "0"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"node-agent","app.kubernetes.io/name":"datadog-1"},"name":"datadog-1","namespace":"default","ownerReferences":[{"apiVersion":"app.k8s.io/v1beta1","blockOwnerDeletion":true,"kind":"Application","name":"datadog-1","uid":"ff4348e9-934f-11e8-bdb6-42010a8000a6"}]},"spec":{"selector":{"matchLabels":{"app.kubernetes.io/component":"node-agent","app.kubernetes.io/name":"datadog-1"}},"template":{"metadata":{"labels":{"app.kubernetes.io/component":"node-agent","app.kubernetes.io/name":"datadog-1"},"name":"datadog-agent"},"spec":{"containers":[{"env":[{"name":"DD_API_KEY","valueFrom":{"secretKeyRef":{"key":"apiKey","name":"datadog-1-api-key"}}},{"name":"KUBERNETES","value":"yes"},{"name":"DD_KUBERNETES_KUBELET_HOST","valueFrom":{"fieldRef":{"fieldPath":"status.hostIP"}}}],"image":"gcr.io/cloud-marketplace/datadog-saas/datadog@sha256:3926fb4957277d01ee1d2ef6733c5b99213b694e2ab127b0cc8d406d07e931d8","imagePullPolicy":"Always","livenessProbe":{"exec":{"command":["./probe.sh"]},"initialDelaySeconds":15,"periodSeconds":10},"name":"datadog-agent","ports":[{"containerPort":8125,"name":"dogstatsdport","protocol":"UDP"},{"containerPort":8126,"name":"traceport","protocol":"TCP"}],"resources":{"limits":{"cpu":"200m","memory":"256Mi"},"requests":{"cpu":"200m","memory":"256Mi"}},"volumeMounts":[{"mountPath":"/host/proc","name":"procdir","readOnly":true},{"mountPath":"/host/sys/fs/cgroup","name":"cgroups","readOnly":true}]}],"serviceAccountName":"datadog-1-sa-2","volumes":[{"hostPath":{"path":"/proc"},"name":"procdir"},{"hostPath":{"path":"/sys/fs/cgroup"},"name":"cgroups"}]}}}}
+  creationTimestamp: 2018-07-29T16:54:15Z
+  generation: 1
+  labels:
+    app.kubernetes.io/component: node-agent
+    app.kubernetes.io/name: datadog-1
+  name: datadog-1
+  namespace: default
+  ownerReferences:
+  - apiVersion: app.k8s.io/v1beta1
+    blockOwnerDeletion: true
+    kind: Application
+    name: datadog-1
+    uid: ff4348e9-934f-11e8-bdb6-42010a8000a6
+  resourceVersion: "760275"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/daemonsets/datadog-1
+  uid: 06c46b37-9350-11e8-857f-42010a8000d4
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: node-agent
+      app.kubernetes.io/name: datadog-1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: node-agent
+        app.kubernetes.io/name: datadog-1
+      name: datadog-agent
+    spec:
+      containers:
+      - env:
+        - name: DD_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: apiKey
+              name: datadog-1-api-key
+        - name: KUBERNETES
+          value: "yes"
+        - name: DOGSTATSD_HOST_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        image: gcr.io/cloud-marketplace/datadog-saas/datadog@sha256:3926fb4957277d01ee1d2ef6733c5b99213b694e2ab127b0cc8d406d07e931d8
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+            - ./probe.sh
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: datadog-agent
+        ports:
+        - containerPort: 8125
+          name: dogstatsdport
+          protocol: UDP
+        - containerPort: 8126
+          name: traceport
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /host/proc
+          name: procdir
+          readOnly: true
+        - mountPath: /host/sys/fs/cgroup
+          name: cgroups
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: datadog-1-sa-2
+      serviceAccountName: datadog-1-sa-2
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /proc
+          type: ""
+        name: procdir
+      - hostPath:
+          path: /sys/fs/cgroup
+          type: ""
+        name: cgroups
+  templateGeneration: 1
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 9
+  desiredNumberScheduled: 9
+  numberAvailable: 9
+  numberMisscheduled: 0
+  numberReady: 9
+  observedGeneration: 1
+  updatedNumberScheduled: 9
