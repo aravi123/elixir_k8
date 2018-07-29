@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: elixir-k8
-          image: aravi123/elixir_k8:datadog-v6
+          image: aravi123/elixir_k8:datadog-v8
           ports:
             - containerPort: 8080
           env:
