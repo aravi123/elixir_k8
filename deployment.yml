@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: elixir-k8
-          image: aravi123/elixir_k8:datadog-v8
+          image: aravi123/elixir_k8:datadog-v9
           ports:
-            - containerPort: 8080
+            - containerPort: 8125
           env:
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:

@@ -19,7 +19,7 @@ RUN mix release --env=prod --verbose \
     && mv /opt/release/bin/${APP_NAME} /opt/release/bin/start_server
 FROM alpine:latest
 RUN apk update && apk --no-cache --update add bash openssl-dev
-ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
+ENV PORT=8125 MIX_ENV=prod REPLACE_OS_VARS=true
 WORKDIR /opt/app
 EXPOSE ${PORT}
 COPY --from=0 /opt/release .
