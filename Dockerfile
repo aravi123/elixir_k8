@@ -1,4 +1,4 @@
-FROM elixir:alpine
+FROM elixir:1.6.6
 ARG APP_NAME=elixir_k8
 ARG PHOENIX_SUBDIR=.
 ENV MIX_ENV=prod REPLACE_OS_VARS=true TERM=xterm
