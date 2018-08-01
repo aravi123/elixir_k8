@@ -1,7 +1,6 @@
-FROM elixir:1.6.6
+FROM elixir:1.6.6-alpine
 ARG APP_NAME=elixir_k8
 ARG PHOENIX_SUBDIR=.
-FROM alpine:latest
 ENV MIX_ENV=prod REPLACE_OS_VARS=true TERM=xterm
 WORKDIR /opt/app
 RUN apk update \
@@ -18,6 +17,7 @@ RUN cd ${PHOENIX_SUBDIR}/assets \
 RUN mix release --env=prod --verbose \
     && mv _build/prod/rel/${APP_NAME} /opt/release \
     && mv /opt/release/bin/${APP_NAME} /opt/release/bin/start_server
+FROM alpine:latest
 RUN apk update && apk --no-cache --update add bash openssl-dev
 ENV PORT=8080 MIX_ENV=prod REPLACE_OS_VARS=true
 WORKDIR /opt/app
