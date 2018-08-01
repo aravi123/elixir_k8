@@ -19,8 +19,7 @@ config :elixir_k8, ElixirK8Web.Endpoint,
   check_origin: false,
   server: true,
   root: ".",
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  dogstatsd: System.get_env("DD_KUBERNETES_KUBELET_HOST")
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
